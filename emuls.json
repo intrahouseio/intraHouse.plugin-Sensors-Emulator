@@ -1,0 +1,44 @@
+{
+    "name": "emuls",
+    "description": "Sensors emulator",
+    "module": "emuls.js",
+    "single": 0,
+  
+    "params": [
+      
+    ],
+  
+    "chpattern": [
+        { "name": "desc", "note": "Тип", "type": "droplist", "data":[{"id":"AI", "name":"Analog sensor(AI)"},{"id":"DI", "name":"Digital sensor(DI)"}] },
+        { "name": "period", "note": "Период, сек", "type": "number"},
+        { "name": "min", "note": "Min", "type": "number", "visible": "data.desc == 'AI'"},
+        { "name": "max", "note": "Max", "type": "number", "visible": "data.desc == 'AI'"},
+        { "name": "delta", "note": "Дельта", "type": "number", "visible": "data.desc == 'AI'"}
+
+    ],
+    
+    "chdefault": {
+        "chan": "AI_1",
+        "desc": "AI",
+        "period": 1,
+        "min":-20,
+        "max":20,
+        "delta":1.5,
+        "dn":""
+      },
+
+
+    "genrules": {
+      "AI": {
+        "type": "200",
+        "cl": "SensorA"
+      },
+      "DI": {
+        "type": "100",
+        "cl": "SensorD"
+      }
+    },
+  
+    "actions": [{}]
+  }
+  
