@@ -19,12 +19,12 @@
     ],
     
     "chdefault": {
-        "chan": "AI_1",
-        "desc": "AI",
-        "period": 1,
-        "min":-20,
-        "max":20,
-        "delta":1.5,
+        "chan": "DI_1",
+        "desc": "DI",
+        "period": 10,
+        "min":0,
+        "max":0,
+        "delta":0,
         "dn":""
       },
 
