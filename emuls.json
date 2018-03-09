@@ -3,6 +3,7 @@
     "description": "Sensors emulator",
     "module": "emuls.js",
     "single": 0,
+    "restartOnChannelsChange":1,
   
     "params": [
       
