@@ -49,7 +49,6 @@ process.on("message", function(message) {
   if (!message) return;
   if (typeof message == "string") {
     if (message == "SIGTERM") {
-      agent.stop();
       process.exit();
     }
   }
@@ -67,10 +66,10 @@ function parseMessageFromServer(message) {
         next();
       }
       if (message.config) {
-        logger.log('config '+JSON.stringify(message.config));
+        logger.log("config " + JSON.stringify(message.config));
         plugin.setConfig(message.config);
-        
-        logger.log('this.reqarr '+JSON.stringify(plugin.reqarr));
+
+        logger.log("this.reqarr " + JSON.stringify(plugin.reqarr));
 
         next();
       }
@@ -85,6 +84,6 @@ function parseMessageFromServer(message) {
 }
 
 process.on("uncaughtException", function(err) {
-  var text = "ERR (uncaughtException): " + util.inspect(err);
+  let text = "ERR (uncaughtException): " + util.inspect(err);
   logger.log(text);
 });

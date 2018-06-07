@@ -1,45 +1,80 @@
 {
-    "name": "emuls",
-    "description": "Sensors emulator",
-    "module": "emuls.js",
-    "single": 0,
-    "restartOnChannelsChange":1,
-  
-    "params": [
-      
-    ],
-  
-    "chpattern": [
-        { "name": "desc", "note": "Тип", "type": "droplist", "data":[{"id":"AI", "name":"Analog sensor(AI)"},{"id":"DI", "name":"Digital sensor(DI)"}] },
-        { "name": "period", "note": "Период, сек", "type": "number"},
-        { "name": "min", "note": "Min", "type": "number", "visible": "data.desc == 'AI'"},
-        { "name": "max", "note": "Max", "type": "number", "visible": "data.desc == 'AI'"},
-        { "name": "delta", "note": "Дельта", "type": "number", "visible": "data.desc == 'AI'"}
+  "name": "emuls",
+  "description": "Sensors emulator",
+  "module": "emuls.js",
+  "single": 0,
+  "restartOnChannelsChange": 1,
 
-    ],
-    
-    "chdefault": {
-        "chan": "DI_1",
-        "desc": "DI",
-        "period": 10,
-        "min":0,
-        "max":0,
-        "delta":0,
-        "dn":""
-      },
+  "params": [],
 
-
-    "genrules": {
-      "AI": {
-        "type": "200",
-        "cl": "SensorA"
-      },
-      "DI": {
-        "type": "100",
-        "cl": "SensorD"
-      }
+  "chpattern": [
+    {
+      "name": "desc",
+      "note": "Тип",
+      "type": "droplist",
+      "data": [
+        { "id": "AI", "name": "Аналоговый датчик (AI)" },
+        { "id": "DI", "name": "Дискретный датчик (DI)" },
+        { "id": "Meter", "name": "Счетчик (Meter)" }
+      ]
     },
-  
-    "actions": [{}]
-  }
-  
+    { "name": "period", "note": "Период, сек", "type": "number" },
+    {
+      "name": "min",
+      "note": "Min",
+      "type": "number",
+      "visible": "data.desc == 'AI'"
+    },
+    {
+      "name": "max",
+      "note": "Max",
+      "type": "number",
+      "visible": "data.desc == 'AI'"
+    },
+    {
+      "name": "delta",
+      "note": "Дельта",
+      "type": "number",
+      "visible": "data.desc == 'AI'"
+    },
+   
+    {
+        "name": "weight",
+        "note": "Вес импульса",
+        "type": "number",
+        "visible": "data.desc == 'Meter'"
+      },
+      {
+      "name": "errperiod",
+      "note": "Генерировать ошибку с периодом, сек",
+      "type": "number"
+    }
+  ],
+
+  "chdefault": {
+    "chan": "DI_1",
+    "desc": "DI",
+    "period": 10,
+    "min": 0,
+    "max": 0,
+    "delta": 0,
+    "dn": "",
+    "weight":1
+  },
+
+  "genrules": {
+    "AI": {
+      "type": "200",
+      "cl": "SensorA"
+    },
+    "DI": {
+      "type": "100",
+      "cl": "SensorD"
+    },
+    "Meter": {
+      "cl": "Meter"
+    }
+  },
+
+  "actions": [{}]
+}
