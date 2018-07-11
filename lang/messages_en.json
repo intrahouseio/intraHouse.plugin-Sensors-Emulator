@@ -1,0 +1,9 @@
+{
+  "AI": "Analog Input",
+  "DI": "Digital Input",
+  "Meter": "Meter",
+  "Type": "Type",
+  "Period": "Period, sec",
+  "Delta": "Delta",
+  "Weight": "Pulse Weight"
+}

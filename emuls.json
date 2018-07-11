@@ -10,15 +10,15 @@
   "chpattern": [
     {
       "name": "desc",
-      "note": "Тип",
+      "note": "$Type",
       "type": "droplist",
       "data": [
-        { "id": "AI", "name": "Аналоговый датчик (AI)" },
-        { "id": "DI", "name": "Дискретный датчик (DI)" },
-        { "id": "Meter", "name": "Счетчик (Meter)" }
+        { "id": "AI", "name": "$AI" },
+        { "id": "DI", "name": "$DI" },
+        { "id": "Meter", "name": "$Meter" }
       ]
     },
-    { "name": "period", "note": "Период, сек", "type": "number" },
+    { "name": "period", "note": "$Period", "type": "number" },
     {
       "name": "min",
       "note": "Min",
@@ -33,22 +33,17 @@
     },
     {
       "name": "delta",
-      "note": "Дельта",
+      "note": "$Delta",
       "type": "number",
       "visible": "data.desc == 'AI'"
     },
    
     {
         "name": "weight",
-        "note": "Вес импульса",
+        "note": "$Weight",
         "type": "number",
         "visible": "data.desc == 'Meter'"
-      },
-      {
-      "name": "errperiod",
-      "note": "Генерировать ошибку с периодом, сек",
-      "type": "number"
-    }
+      }
   ],
 
   "chdefault": {
