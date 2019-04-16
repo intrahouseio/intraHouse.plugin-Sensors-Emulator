@@ -3,7 +3,7 @@
   "description": "Sensors emulator",
   "module": "emuls.js",
   "single": 0,
-  "restartOnChannelsChange": 1,
+  "restartOnChannelsChange": 0,
 
   "params": [],
 
@@ -18,7 +18,7 @@
         { "id": "Meter", "name": "$Meter" }
       ]
     },
-    { "name": "period", "note": "$Period", "type": "number" },
+    { "name": "period", "note": "Period ms", "type": "number" },
     {
       "name": "min",
       "note": "Min",

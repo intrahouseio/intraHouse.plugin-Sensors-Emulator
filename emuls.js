@@ -3,87 +3,38 @@
  */
 const util = require("util");
 
-const logger = require("./lib/logger");
-const plugin = require("./lib/plugin");
+const plugin = require("./lib/plugin")(); 
+const myapp = require("./emulator"); 
 
-let step = 0;
-plugin.unitId = process.argv[2];
+myapp.start(plugin);
+plugin.log("Emulator has started.");
 
-logger.log("Plugin " + plugin.unitId + " has started.", "connect");
-next();
+plugin.params.get()
+  .then(result => {
+    myapp.params = result;
+    myapp.getChannelsAndRun();
+  })
+  .catch(e => {
+    plugin.exit(8, "ERROR! " + util.inspect(e));
+  });
 
-function next() {
-  switch (step) {
-    case 0:
-      // Запрос на получение параметров
-      getTable("params");
-      step = 1;
-      break;
-    case 1:
-      // Запрос на получение каналов
-      getTable("config");
-      step = 2;
-      break;
-    case 2:
-      // Запуск Основного цикла опроса - 100 мс
-      setInterval(runOutReq, 100);
-      step = 3;
-      break;
-    default:
-  }
-}
+/** 
+plugin.params.get()
+  .then(result => {
+    myapp.params = result;
+    return plugin.channels.get();
+  })
+  .then(result => {
+    if (result && result.length > 0) {
+        myapp.channels = result;
 
-function getTable(name) {
-  process.send({ type: "get", tablename: name + "/" + plugin.unitId });
-}
-
-function runOutReq() {
-  let item = plugin.getNextReq();
-  if (item) {
-    plugin.genAndSendNext(item);
-  }
-}
-
-/******************************** Входящие от IH ****************************************************/
-process.on("message", function(message) {
-  if (!message) return;
-  if (typeof message == "string") {
-    if (message == "SIGTERM") {
-      process.exit();
+      // Запуск основного цикла
+      myapp.run();
+    } else {
+      plugin.exit(7, "Missing channels! Stop plugin.");
     }
-  }
-  if (typeof message == "object" && message.type) {
-    parseMessageFromServer(message);
-  }
-});
-
-function parseMessageFromServer(message) {
-  switch (message.type) {
-    case "get":
-      if (message.params) {
-        plugin.setParams(message.params);
-        if (message.params.debug) logger.setDebug(message.params.debug);
-        next();
-      }
-      if (message.config) {
-        logger.log("config " + JSON.stringify(message.config));
-        plugin.setConfig(message.config);
-
-        logger.log("this.reqarr " + JSON.stringify(plugin.reqarr));
-
-        next();
-      }
-      break;
-
-    case "debug":
-      if (message.mode) logger.setDebug(message.mode);
-      break;
-
-    default:
-  }
-}
-
-process.on("uncaughtException", function(err) {
-  let text = "ERR (uncaughtException): " + util.inspect(err);
-  logger.log(text);
-});
+  })
+  .catch(e => {
+    plugin.exit(8, "ERROR! " + util.inspect(e));
+  });
+*/
