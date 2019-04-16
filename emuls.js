@@ -18,7 +18,10 @@ plugin.params.get()
     plugin.exit(8, "ERROR! " + util.inspect(e));
   });
 
+
+
 /** 
+ // Можно строить цепочки промисов. 
 plugin.params.get()
   .then(result => {
     myapp.params = result;
@@ -37,4 +40,10 @@ plugin.params.get()
   .catch(e => {
     plugin.exit(8, "ERROR! " + util.inspect(e));
   });
+  
+// Можно подписку реализовать прямо здесь
+plugin.channels.onChange((data) => {
+        plugin.log('CHANNELS OnChange event. data='+util.inspect(data));
+         this.getChannelsAndRun();
+});
 */
