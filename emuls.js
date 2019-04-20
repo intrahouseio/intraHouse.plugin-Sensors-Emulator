@@ -3,7 +3,7 @@
  */
 const util = require("util");
 
-const plugin = require("./lib/plugin")(); 
+const plugin = require("ih-plugin-api")(); 
 const myapp = require("./emulator"); 
 
 myapp.start(plugin);
