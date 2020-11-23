@@ -2,23 +2,69 @@
  * emuls.js
  */
 const util = require("util");
+// const fs = require("fs");
 
 const plugin = require("ih-plugin-api")(); 
 const myapp = require("./emulator"); 
 
+console.log('START EMUL')
 myapp.start(plugin);
 plugin.log("Emulator has started.");
+// const logfile = '/opt/intrahouse-c/log/emul.log';
+
+// let stream = fs.createWriteStream(logfile, { flags: 'a', encoding: 'utf-8', mode: 0o666 });
 
 plugin.params.get()
   .then(result => {
     myapp.params = result;
     myapp.getChannelsAndRun();
+    // setInterval( sendOne, 1000);
   })
   .catch(e => {
     plugin.exit(8, "ERROR! " + util.inspect(e));
   });
 
 
+  /**
+ * Запросы от сервера - обработчик сообщений type:command
+ * {type:"command", command:"..."}
+ */
+plugin.onCommand(message => {
+  switch (message.command) {
+    case "fileupload":
+      return fileUpload(message);
+
+    default:
+      throw { message: "Unknown command in message:" + util.inspect(message) };
+  }
+});
+
+function fileUpload(message) {
+  plugin.log('fileUploaded file=' + message.file);
+}
+
+/*
+function sendOne() {
+    for (var i=0; i<3000; i++) {
+        let sobj = [{id:'I'+i, value: i/100}];
+        plugin.sendData(sobj);
+        stream.write(logstr(util.inspect(sobj)));
+    }
+}
+*/
+/*
+function logstr(str) {
+    let dt = new Date();
+    return dt.getHours() +
+    ':' +dt.getMinutes() +
+    ':' +dt.getSeconds() +
+    '.' +dt.getMilliseconds()+' '+str+ '\r\n';
+}
+
+process.on('exit', () => {
+    stream.end();
+})
+*/
 
 /** 
  // Можно строить цепочки промисов. 
@@ -40,10 +86,15 @@ plugin.params.get()
   .catch(e => {
     plugin.exit(8, "ERROR! " + util.inspect(e));
   });
-  
+*/
+
 // Можно подписку реализовать прямо здесь
-plugin.channels.onChange((data) => {
+// plugin.channels.onChange((data) => {
+/*
+plugin.onChange('channels',(data) => {
         plugin.log('CHANNELS OnChange event. data='+util.inspect(data));
-         this.getChannelsAndRun();
+        // this.getChannelsAndRun();
 });
 */
+
+

@@ -1,9 +1,10 @@
 {
   "name": "emuls",
   "description": "Sensors emulator",
-  "module": "emuls.js",
+  "module": "xemuls.js",
   "single": 0,
   "restartOnChannelsChange": 0,
+  "ruleId":{ "pref": "emul", "len": 3 },
 
   "params": [],
 
@@ -15,7 +16,9 @@
       "data": [
         { "id": "AI", "name": "$AI" },
         { "id": "DI", "name": "$DI" },
-        { "id": "Meter", "name": "$Meter" }
+        { "id": "Meter", "name": "$Meter" },
+        { "id": "DO", "name": "$DO" },
+        { "id": "AO", "name": "$AO" }
       ]
     },
     { "name": "period", "note": "Period ms", "type": "number" },
@@ -47,7 +50,6 @@
   ],
 
   "chdefault": {
-    "chan": "DI_1",
     "desc": "DI",
     "period": 10,
     "min": 0,
@@ -68,7 +70,9 @@
     },
     "Meter": {
       "cl": "Meter"
-    }
+    },
+    "AO": { "cl": "ActorA" },
+    "DO": { "cl": "ActorD" }
   },
 
   "actions": [{}]

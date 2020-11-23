@@ -1,0 +1,14 @@
+{
+  "grid": [
+    { "id": "p1", "xs": 12, "class": "main", "table": "units" }
+    
+  ],
+
+  "spacing": 10,
+  "breadcrumbs": { "tree": "plugins" },
+  "p1": [
+    { "prop": "plugin", "title": "Plugin", "type": "text"},
+    { "prop": "id", "title": "$Name", "type": "text" },
+    { "prop": "version", "title": "$Version", "type": "text" }
+  ]
+}
