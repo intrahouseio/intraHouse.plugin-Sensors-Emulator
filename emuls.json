@@ -1,10 +1,9 @@
 {
   "name": "emuls",
-  "description": "Sensors emulator",
-  "module": "xemuls.js",
+  "description": "Emulator",
+  "module": "emuls.js",
   "single": 0,
   "restartOnChannelsChange": 0,
-  "ruleId":{ "pref": "emul", "len": 3 },
 
   "params": [],
 
