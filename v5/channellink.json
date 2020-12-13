@@ -32,7 +32,7 @@
     { "prop": "min", "title": "Min", "type": "input", "hide": "data.p2.desc.id != \"AI\"" },
     { "prop": "max", "title": "Max", "type": "input", "hide": "data.p2.desc.id != \"AI\"" },
     { "prop": "delta", "title": "$Delta", "type": "input", "hide": "data.p2.desc.id != \"AI\"" },
-    { "prop": "random", "title": "$Random", "type": "cb", "hide": "data.p2.desc.id != \"AI\"" }
+    { "prop": "random", "title": "RandomX", "type": "cb", "hide": "data.p2.desc.id != \"AI\"" }
   
   ]
 }

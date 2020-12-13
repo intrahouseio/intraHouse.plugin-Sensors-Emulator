@@ -7,10 +7,12 @@
 
   "p2": [
     { "prop": "chan", "title": "Channel ID", "type": "input" },
+    { "prop": "w", "title": "Команда", "type": "cb" },
     {
       "prop": "desc",
       "title": "$Desc",
       "type": "droplist",
+      "hide": "data.p2.w",
       "data": [
         {
           "id": "DI",
@@ -22,12 +24,13 @@
         }
       ]
     },
-    { "prop": "period", "title": "$Period", "type": "input" }
+    { "prop": "period", "title": "$Period", "type": "input", "hide": "data.p2.w" }
   ],
   "p3": [
-    { "prop": "min", "title": "Min", "type": "input", "hide": "data.p2.desc.id != \"AI\"" },
-    { "prop": "max", "title": "Max", "type": "input", "hide": "data.p2.desc.id != \"AI\"" },
-    { "prop": "delta", "title": "$Delta", "type": "input", "hide": "(data.p2.desc.id != \"AI\") || data.p3.random" },
-    { "prop": "random", "title": "$Random", "type": "cb", "hide": "data.p2.desc.id != \"AI\"" }
+    { "prop": "min", "title": "Min", "type": "input", "hide": "data.p2.w || data.p2.desc.id != \"AI\"" },
+    { "prop": "max", "title": "Max", "type": "input", "hide": "data.p2.w || data.p2.desc.id != \"AI\"" },
+    { "prop": "delta", "title": "$Delta", "type": "input", "hide": "data.p2.w || data.p2.desc.id != \"AI\"" },
+    { "prop": "setchan", "title": "Записать в канал данных", "type": "input", "hide": "!data.p2.w" },
+    { "prop": "setval", "title": "Записать значение", "type": "input", "hide": "!data.p2.w" }
   ]
 }

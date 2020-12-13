@@ -31,12 +31,14 @@ module.exports = {
 
         const result = [];
         message.data.forEach(item => {
+          /*
           let value = item.value;
           if (item.command) {
             const idx = ['off', 'on'].indexOf(item.command);
             if (idx >= 0) value = idx;
           }
-          result.push({ id: item.id, value });
+          */
+          result.push({ id: item.setchan, value: item.setval });
         });
         plugin.log('AFTER ACT: ' + util.inspect(result));
         plugin.sendData(result);
@@ -161,7 +163,6 @@ module.exports = {
   },
 
   genRandom(item) {
-
     return item.min + Math.floor((item.max - item.min) * Math.random());
   }
 };
