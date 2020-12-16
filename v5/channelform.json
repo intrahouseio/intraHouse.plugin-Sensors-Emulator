@@ -10,7 +10,7 @@
     { "prop": "chan", "title": "Channel ID", "type": "input" },  
     {
       "prop": "desc",
-      "title": "$Desc",
+      "title": "$Type",
       "type": "droplist",
       "hide": "data.p3.w",
       "data": [
