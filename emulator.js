@@ -77,9 +77,20 @@ module.exports = {
     const plugin = this.plugin;
 
     this.interval = setInterval(() => {
-      const item = this.getNextFromTimers();
-      if (item && item.index != undefined && item.index < this.reqarr.length) {
-        plugin.sendData(this.gen(item.index));
+      const toSendIdx = [];
+      let item = this.getNextFromTimers();
+      while (item) {
+        if (item && item.index != undefined && item.index < this.reqarr.length) {
+          // plugin.sendData(this.gen(item.index));
+          toSendIdx.push(item.index);
+          item = this.getNextFromTimers();
+        } else {
+          item = '';
+        }
+      }
+      if (toSendIdx.length) {
+        const arr = toSendIdx.map(idx => this.gen(idx)[0]);
+        plugin.sendData(arr);
       }
     }, 100);
   },
@@ -105,7 +116,7 @@ module.exports = {
     this.timers = [];
     for (var i = 0; i < this.reqarr.length; i++) {
       if (i == 0) {
-        this.timers.push({ index: 0, qtime: curtime });
+        this.timers.push({ index: 0, qtime: curtime + this.reqarr[i].tick });
       } else {
         this.insertTimer({ index: i, qtime: 0 }, curtime);
       }

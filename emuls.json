@@ -49,8 +49,9 @@
   ],
 
   "chdefault": {
+    "chan":"0001",
     "desc": "DI",
-    "period": 10,
+    "period": 60,
     "min": 0,
     "max": 0,
     "delta": 0,
