@@ -7,9 +7,12 @@ const util = require("util");
 const plugin = require("ih-plugin-api")(); 
 const myapp = require("./emulator"); 
 
-console.log('START EMUL')
 myapp.start(plugin);
 plugin.log("Emulator has started.");
+
+sendProcessInfo();
+setInterval(sendProcessInfo, 10000);
+
 // const logfile = '/opt/intrahouse-c/log/emul.log';
 
 // let stream = fs.createWriteStream(logfile, { flags: 'a', encoding: 'utf-8', mode: 0o666 });
@@ -41,6 +44,14 @@ plugin.onCommand(message => {
 
 function fileUpload(message) {
   plugin.log('fileUploaded file=' + message.file);
+}
+
+function sendProcessInfo() {
+  const mu = process.memoryUsage();
+  const memrss = Math.floor(mu.rss/1024)
+  const memheap = Math.floor(mu.heapTotal/1024)
+  const memhuse = Math.floor(mu.heapUsed/1024)
+  process.send({type:'procinfo', data:{memrss,memheap, memhuse }});
 }
 
 /*
